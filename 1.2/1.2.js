@@ -36,3 +36,5 @@ let t1=2,t2=210,t3=78,t4=79,t5=80;
 console.log("test average=   "+(t1+t2+t3+t4+t5)/5);
 
 //Power of any number x ^ y.
+let x1 =2,y1=4;
+console.log(Math.pow(x1,y1)); 
