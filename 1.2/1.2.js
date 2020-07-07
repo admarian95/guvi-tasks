@@ -86,6 +86,15 @@ console.log(num1/num2);
 console.log(num1**num2);
 console.log(num1%num2);
 
+
+//Display the asterisk pattern
+
+console.log("***** \n");
+console.log("***** \n");
+console.log("***** \n");
+console.log("***** \n");
+console.log("***** \n");
+
 // Calculate electricity bill
 P=100;
 console.log("amount=   "+parseFloat(P/1000)*30*10);
