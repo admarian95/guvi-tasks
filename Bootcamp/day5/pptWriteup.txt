@@ -1,0 +1,43 @@
+Errors :
+
+The presentation tells about the existence of errors and the way errors need to be handled and development practices for minimizing their occurances.
+
+There are rules for good development practices keeping errors in mind:
+
+1. assuming that code will fail - 
+Having this aspect increases thought process of providing flexibility during developing.
+
+2. Log errors to the server -
+Logging errors on client side exposes a lot of unnecessary vunerabilities that can be tracked by malicious users.
+Use code blocks like try-catch on server side can "handle" the error.
+
+Error lifecycle --> Error -> try-catch -> window.onerror -> browser
+*best practice is to handle it at server side
+
+3. Know the vulnerable spots where your code can faulter.
+
+Type of errors:
+a.Type coercion errors : 
+
+Type coercion is the process of converting value from one type to another 
+(such as string to number, object to boolean, and so on).
+Any type, be it primitive or an object, is a valid subject for type coercion. 
+for instance if(null) is never executed.
+
+b. Data Type errors
+
+if data type of variables in a function is not as expected can lead to unexpected crashing of site.
+
+c. Communication Errors
+
+These are involved when a network request is made or a resource needs to be accessed from 
+a for say, remote server.
+
+Server response status especially 3XX needs to be looked carefully.
+While making xmlHttpRquest or ajax , axios handle the response method using suitable try catch.
+
+4. Throw your own errors
+For handling extreme cases when developer senses the code can be vulnerable at a certain spot , 
+
+//Slide 35
+5. 
