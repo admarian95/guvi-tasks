@@ -161,5 +161,126 @@ addProperty(obj, 'mykey');
 console.log(obj);
 console.log('===================================');
 
-//remove property...
+// 23. Write a function called “removeProperty”.
+//Given an object and a key, “removeProperty” removes the given key from the given object.
 
+removeProperty =(obj,key)=> delete obj[key];
+removeProperty(obj,'mykey');
+console.log(obj);
+console.log('===================================');
+
+// 24. Return an array, where the first element is 
+//the count of positives numbers and the second element is sum of negative numbers.
+
+// this can be done efficiently with reduce() ... not understood it fully
+countPositivesSumNegatives =(arr)=> {
+    let count=0;
+    let sum=0;
+    arr.forEach(a=>{
+        (a<0)?count++ : sum+=a;
+    })
+    return [count,sum];
+}
+console.log(countPositivesSumNegatives([-5, 10, -3, 12, -9, 5, 90, 0, 1]));
+console.log('===================================');
+
+// 25. Create a function that receives an array of 
+//numbers and returns an array containing only the positive numbers.
+
+getPositives= arr => arr.filter(a=> a>0);
+
+console.log(getPositives([-5, 10, -3, 12, -9, 5, 90, 0, 1]));
+console.log('===================================');
+
+// 26. Write a function `powersOfTwo` which will return list 
+//of all powers of 2 from 0 to n (where n is an exponent).
+
+powersOfTwo = n => Array(n).fill().map((a,i)=> Math.pow(i,2));
+console.log(powersOfTwo(5));
+console.log('===================================');
+
+// 27. Find the maximum number in an array of numbers
+
+findMax = arr=>  arr.reduce((prev,next)=> Math.max(prev,next));
+console.log(findMax([1,2,3,6,5,4,7,2]));
+console.log('===================================');
+
+// 28. Print the first 100 prime numbers
+
+let primeArr =[]
+function isPrime(num){
+
+    for(let i=2;i<=Math.sqrt(num);i++){
+        if(num%i === 0) return false;
+    }
+    return true;
+}
+
+function primeUpto(num){
+    for(let i=2;i<=num;i++){
+        if(isPrime(i)){
+            primeArr.push(i);
+        }
+    }
+    console.log(primeArr)
+}
+primeUpto(100);
+console.log('===================================');
+
+//  29. Create a function that will return in an array the first “nPrimes” 
+//  prime numbers greater than a particular number “startAt”.
+function getPrimes(n,ind){
+    let xn=[];
+    for(let i=ind;;i++){
+            if(isPrime(i)){
+                xn.push(i);
+            }
+            if(xn.length === n){
+                break;
+            }
+            }
+            console.log(xn)
+        }
+
+getPrimes(10,100);
+console.log('===================================');
+
+// 30. Reverse a string . Exception didnt add the case if array length is 2 here.
+
+function reverseString(str){
+     let s =[...str];
+     let temp='';
+for(let i=0;i<=Math.floor(s.length/2);i++){
+temp = s[i];
+s[i]=s[s.length-1-i];
+s[s.length-1-i]=temp;
+}
+console.log(s.join(''));
+}
+reverseString("APoorv");
+console.log('===================================');
+
+// Create a function that will merge two arrays and return the result as a new array
+
+function mergeArrays(ar1, ar2)
+{
+ let temp = [];
+//this will add the first array to the result array
+for(let el of ar1)
+ {
+ temp.push(el);
+ }
+ for(let el of ar2)
+ {
+ temp.push(el);
+ }
+  console.log(temp);
+}
+
+mergeArrays([1, 2, 3],[4, 5, 6]);
+console.log('===================================');
+
+// Calculate the sum of numbers received in a comma delimited string
+sumOfno =arr=> console.log([...arr.trim().split(',')].map(a=> +a).reduce((sum,arr) => sum +arr));
+sumOfno('1.5, 2.3, 3.1, 4, 5.5, 6, 7, 8, 9, 10.9');
+console.log('===================================');
