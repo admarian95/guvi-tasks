@@ -1,0 +1,108 @@
+.container{
+    margin: 0 1.5%;
+}
+
+.head{
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.main_content{
+margin: 0 3%;
+}
+
+.subheading{
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    margin-top: 0;  
+    line-height: 27px;
+}
+
+.content{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.content .text{
+    width: 20%;
+}
+
+.content .img{
+    width: 70%;
+    background-color: blueviolet;
+    position: relative;
+}
+
+.tag{
+    width: 50%;
+    background-color: brown;
+    color:white;
+    display: inline-block;
+    position: relative;
+    top: 0;
+}
+.tag span{
+    margin-left: 7%;
+    vertical-align: sub;
+}
+.tag:after{
+    content: '';
+    border-right: 10px solid white;
+    border-bottom: 22px solid  brown;
+    position: absolute;
+    right: 0;
+}
+
+.img .page_bullet{
+    background-color: black;
+    color:white;
+    display: inline-block;
+    border-radius: 50%;
+    width: 53px;
+    height: 53px;
+    text-align: center;
+}
+.img-text{
+    width: 50%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 12px;
+    text-align: end;
+}
+
+.img-text-comp {
+    margin-right: 17px; 
+}
+.img-text-comp .img{
+width: 98%;
+background-color: pink;
+height: 150px;
+}
+.img-text-comp .img .tag{
+    clip-path: polygon(0 0, 60% 0%, 70% 100%, 0% 100%);
+    top: -6px;
+}
+.img-text-comp .img .tag::after{
+    border: none;
+}
+.img-text-comp .img .img-text {
+   width: auto;
+   display: inline-block;
+}
+
+.img-text-comp .free-text{
+border-top: 2px solid;
+color: red;
+font-size: 33px;
+line-height: 27px;
+font-style: italic;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid;
+}
