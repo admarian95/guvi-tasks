@@ -1,0 +1,142 @@
+.container{
+    border : 1px solid;
+    border-radius: 5px;
+    padding: 0 4%;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.hero{
+background-color: darkgray;
+height: 225px;
+position: relative;
+}
+
+.resume_details{
+    margin-top: 2%;
+    display: flex;
+}
+
+.highlighter{
+    position: absolute;
+    bottom: 15%;
+    background-color: lightgray;
+    width: 100%;
+    height: 12px; 
+}
+.name_img .name p{
+    padding-top: 6px;
+}
+.name{
+    background-color: yellow;
+    height: 60px;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: -35px;
+    border-radius: 5px;
+}
+.img{
+    text-align: center;
+   
+}
+.name_img{
+    position: relative;
+    margin: 0 auto;
+    width: 50%;
+    bottom: 5%
+}
+.name_img img{
+    height: 176px;
+    position: relative;
+    top: 26px;
+    border-radius: 50%;
+    border: 5px dotted yellow;
+}
+.details {
+    background-color: white;
+    height: 30px;
+    text-align: center;
+}
+
+.left_resume{
+    width: 46%;
+    padding: 0 2%;
+}
+.right_resume{
+    width: 46%;
+}
+
+.spacer {
+    width: 8%;
+    border-left: 1px solid grey; 
+    position:relative; 
+    left: 4%; 
+}
+
+.profile span,.skills span, .workEx span , .education span{
+   margin-left: 3%;
+   position: relative;
+   bottom: 15px;
+}
+
+.profile img,.skills img , .workEx img, .education img{
+    border-radius: 50%;
+    border: 3px dotted goldenrod;
+}
+
+.profile .text{
+    margin-top: 15px;
+}
+
+.skills {
+    margin-top: 5%;
+}
+.skill{
+    display: flex;
+    justify-content: space-between;
+}
+.skill input{
+    padding-bottom: 4px;
+}
+
+.techSkills,.additionalSkills{
+    margin: 2% 0;
+    text-align: center;
+}
+
+.workEx .heading{
+    margin-top: 3%;
+    justify-content: space-between;
+}
+.main_head{
+    margin-bottom: 2%;
+}
+.main_head .heading{
+    display: flex;
+}
+.main_head .heading strong{
+max-width: 175px;
+}
+.foot .heading {
+    display: flex;
+    justify-content: space-between;
+}
+.foot strong{
+    max-width: 175px
+}
+
+.workEx img , .education img, .skills img, .profile img{
+    height: 52px;
+}
+
+.skills h3{
+    margin:0;
+    text-align: center;
+}
+
+.details p{
+    margin: 0;
+    padding: 4px 0;
+    border-bottom: 1px solid grey;
+}
