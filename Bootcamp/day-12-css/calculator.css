@@ -1,0 +1,45 @@
+.container{
+    background-color: pink;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.number{
+    background-color: gray;
+    flex-grow: 1;
+    text-align: center;
+    border-bottom: 3px solid gray;
+    margin-right: 3px;
+}
+
+.number button {
+    padding :11px 11px 7px 11px;
+    width: 100%;
+    border: none;
+    background-color: darkgray;
+}
+
+.row:last-child{
+    padding:0;
+    flex-grow: 1;
+}
+.row:last-child .number button{
+height: 100%;
+}
+.row{
+    display: inline-flex;
+    width: 500px;
+    padding-bottom: 12px;
+}
+
+.main-container{
+    display: inline-flex;
+}
+
+.clear{
+    display: flex;
+}
+
+.input {
+    margin-top: 5%
+}
