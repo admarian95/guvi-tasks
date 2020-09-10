@@ -1,0 +1,27 @@
+.container{
+    background-color: blueviolet;
+}
+.card .card-heading{
+    background-color: black;
+    height: 40px;
+}
+.row{
+   justify-content: space-evenly;
+}
+.card{
+    margin: 10px 0;
+}
+.card-heading p{
+    margin: 0;
+    text-align: center;
+    color: white;
+    padding-top: 5px;
+}
+
+.weather{
+    display: none;
+}
+
+.weather.show {
+    display: block;
+}
