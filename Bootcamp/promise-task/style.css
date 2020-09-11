@@ -17,11 +17,21 @@
     color: white;
     padding-top: 5px;
 }
-
+.card-img-top{
+    margin: 10px 0;
+}
 .weather{
     display: none;
 }
 
 .weather.show {
     display: block;
+}
+
+.error{
+    display: none;
+}
+.error.show{
+    display: block;
+    color: red;
 }
