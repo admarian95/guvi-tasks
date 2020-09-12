@@ -65,18 +65,17 @@ function createCard(id) {
 }
 let row = createDiv(['row']);
 let container = createDiv(['container']);
-for (let i = 1; i <= 3; i++) {
-    row.appendChild(createCard(i));
-}
-container.appendChild(row);
 document.body.appendChild(container);
 console.log(document.body);
 fetch('https://restcountries.eu/rest/v2/all')
     .then(data => data.json())
-    .then(d => d.splice(0, 3))
     .then(data => {
         for (let i = 0; i < data.length; i++) {
             console.log(data[i].name);
+            row.appendChild(createCard(i+1));
+            container.appendChild(row);
+            let a = document.getElementsByClassName('btn');
+            a[i].addEventListener("click",e=>_btnClick(e));
             let el = document.getElementById(i + 1);
             let heading = el.querySelector('.card-heading p');
             let capital = el.querySelector('.card-body .capital span');
@@ -91,11 +90,9 @@ fetch('https://restcountries.eu/rest/v2/all')
         }
     })
 
-let a = document.getElementsByClassName('btn');
-console.log([...a]);
-[...a].forEach(el => el.addEventListener('click', (e) => {
+    function _btnClick(e){
     let country = (e.path[3].querySelector('.card-heading p').innerText);
-    let a = fetch('https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?q=' + country + '&appId=cc5280d8ff487e8ed1d1c93a06658a46')
+    let a = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + country + '&appId=cc5280d8ff487e8ed1d1c93a06658a46')
         .then(data => data.json(), err => err)
         .then(d => {
             if (d.cod === '404') {
@@ -109,5 +106,4 @@ console.log([...a]);
                 temp.innerText = d.main.temp + '  kelvin';
             }
         });
-}));
-
+    }
