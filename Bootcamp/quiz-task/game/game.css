@@ -1,0 +1,80 @@
+.progressBar div{
+    display: inline-block;
+    height: 100%;
+    background-color: lightblue;
+}
+.overlay{
+    position: fixed;
+    opacity: 1;
+    background-color: lightcoral;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    transition: opacity .5s ease;
+}
+.overlay.display-none{
+    display: none;
+}
+.overlay h1{
+    text-align: center;
+    margin: 15% auto;
+}
+.overlay.is-loaded{
+    opacity: 0;
+}
+.container {
+    padding: 10% 0; 
+    margin: 0 8%;
+    width: 70%;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+}
+.container.is-visible{
+    opacity: 1;
+}
+
+.progressBar {
+    display: inline-block;
+    border: 1px solid lightblue;
+    height: 30px;
+    width: 30%;
+}
+
+.choice-text {
+    display: flex;
+    height: 50px;
+    border: 1px solid lightblue;
+    margin-bottom: 5px;
+}
+
+.question {
+    padding-left: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.opt {
+    text-align: center;
+    padding: 10px 0;
+    height: 100%;
+    width: 10%;
+    background-color: blueviolet;
+    color: white;
+}
+
+.answer-option {
+    flex-grow: 1;
+    padding: 4px 2px 2px 8px;
+}
+.is-selected{
+    border: 2px solid yellow;
+}
+.answer-option:hover{
+    cursor: pointer;
+}
+.next{
+    border: 1px solid gray;
+    border-radius: 6px;
+    color: white;
+    background-color: blueviolet;
+}

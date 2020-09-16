@@ -6,89 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="game.css">
+    <title>Game On!</title>
 </head>
-<style>
-    .container {
-        margin: 10% auto;
-        width: 60%;
-    }
-
-    .progressBar {
-        display: inline-block;
-        border: 1px solid lightblue;
-        height: 30px;
-        width: 30%;
-    }
-
-    .choice-text {
-        display: flex;
-        height: 50px;
-        border: 1px solid lightblue;
-        margin-bottom: 5px;
-    }
-
-    .question {
-        padding-left: 2.5rem;
-        margin-bottom: 10px;
-    }
-
-    .opt {
-        text-align: center;
-        padding: 8px 0;
-        height: 40px;
-        width: 10%;
-        background-color: blueviolet;
-        color: white;
-    }
-
-    .answer-option {
-        flex-grow: 1;
-        padding: 4px 2px 2px 8px;
-    }
-    .is-selected{
-        border: 2px solid yellow;
-    }
-</style>
-
 <body>
-    <div class="container">
-        <p class="question" id="progressText">Question <span>1/10</span></p>
-        <div class="progressBar"></div>
-        <div class="question">
-            What is the capital?
-        </div>
-        <div class="options">
-            <ul>
-                <li class="choice-text">
-                    <div class="opt">
-                        A
-                    </div>
-                    <div class="answer-option"> </div>
-                </li>
-                <li class="choice-text">
-                    <div class="opt">
-                        B
-                    </div>
-                    <div class="answer-option"> </div>
-                </li>
-                <li class="choice-text">
-                    <div class="opt">
-                        C
-                    </div>
-                    <div class="answer-option"> </div>
-                </li>
-                <li class="choice-text">
-                    <div class="opt">
-                        D
-                    </div>
-                    <div class="answer-option"></div>
-                </li>
-                <button id="next" class="next">SUBMIT AND NEXT</button>
-                
-            </ul>
-        </div>
-    </div>
     <script src="script.js"></script>
 </body>
 

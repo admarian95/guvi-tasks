@@ -1,0 +1,21 @@
+.container{
+    text-align: center;
+    width: 500px;
+    margin-top: 20%;
+}
+button{
+    text-decoration: none;
+    background-color: transparent;
+   width: 100%;
+   border: 1px solid gray;
+   border-radius: 6px;
+    color: white;
+}
+button:hover{
+    color: lightblue;
+    text-decoration: none;
+}
+p{
+    background-color: blueviolet;
+    border-radius: 6px;
+}
