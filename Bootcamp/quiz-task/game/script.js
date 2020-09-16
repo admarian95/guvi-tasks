@@ -56,9 +56,19 @@ p = wrap(p,[sp1,sp2]);
 let options = createDiv(['options']);
 let ul = document.createElement('ul');
 let button = createButton("next","next",'SUBMIT AND NEXT');
+let t;
 for (let i=0;i<4;i++){
      let li = createLi(['choice-text']);
-let opt = createDiv(['opt'],'A');
+     if(i===0){
+          t='A';
+     } if(i===1){
+          t='B';
+     } if(i===2){
+          t='C';
+     } if(i===3){
+          t='D';
+     }
+let opt = createDiv(['opt'],t);
 let ans = createDiv(['answer-option']);
 li = wrap(li,[opt,ans]);
 ul.append(li);

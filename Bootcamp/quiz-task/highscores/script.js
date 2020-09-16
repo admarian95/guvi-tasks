@@ -15,7 +15,7 @@ createDOM();
 
 
 let goHomeBtn = document.getElementById('goHome');
-goHomeBtn.addEventListener('click',()=>window.location.href ='../index/index.html');
+goHomeBtn.addEventListener('click',()=>window.location.href ='../index.html');
 let ul = document.getElementsByTagName('ul')[0];
 function createLI(){
     let li = document.createElement('li');

@@ -45,5 +45,5 @@ let highScoreBtn = createButton("highScore","HIGH SCORES");
 highScore = wrap(highScore,[highScoreBtn]);
 container.append(h5,play,highScore);
 document.body.append(container);
-playBtn.addEventListener('click',()=>window.location.href='../game/game.html');
-highScoreBtn.addEventListener('click',()=>window.location.href='../highscores/highscores.html');
+playBtn.addEventListener('click',()=>window.location.href='./game/game.html');
+highScoreBtn.addEventListener('click',()=>window.location.href='./highscores/highscores.html');

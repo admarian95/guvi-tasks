@@ -83,4 +83,4 @@ saveBtn.addEventListener('click',()=>{
 })
 
 playAgain.addEventListener('click',()=>window.location.href='../game/game.html');
-goHome.addEventListener('click',()=>window.location.href='../index/index.html');
+goHome.addEventListener('click',()=>window.location.href='../index.html');
