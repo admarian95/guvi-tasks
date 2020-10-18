@@ -1,0 +1,153 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    outline: none;
+}
+input,button{
+    border: none;
+    border-radius: 2px;
+}
+body{
+    font-family: 'Courier New', Courier, monospace; 
+}
+.container{
+    background-color: pink;
+    height: 100vh;
+}
+.container h2 , .container h4{
+    text-align: center;
+    padding-top: 20px;
+}
+.content{
+    background-color: gray;
+    height: 200px;
+    position: relative;
+    top: 24%;
+    width: 50%;
+    margin: 0 auto;
+    overflow: scroll;
+    padding: 0 16px;
+}
+
+/* .inputForm{
+   
+} */
+
+.name{
+    width: 70%;
+    display: inline-block;
+}
+.name input{
+    width: 100%;
+    border: 0;
+    padding-left: 6px;
+}
+.additional{
+    display: flex;
+    justify-content: space-around;
+}
+@media only screen and (min-width: 1025px){
+    .name{
+        margin: 10px;
+    }
+    .name input{
+        padding-left: 6px;
+        height: 40px;
+        margin-top: 4px;
+    }
+    .name button{
+        background-color: lightblue;
+        padding: 6px;
+        margin-top: 6px;
+        width: 80px;
+        height: 30px;
+        color: white;
+        transition: background-color 0.2s ease-in;
+    }
+    .name button:hover{
+        cursor: pointer;
+        background-color: deepskyblue;
+        transition: background-color 0.3s ease-in;
+    }
+    .add-query-content .query-el , .add-sort-content .query-el{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 12px;
+        opacity: 0;
+    }
+    .add-query-content .query-el .param , .add-query-content .query-el .param-value, .add-sort-content .query-el .param, .add-sort-content .query-el .param-value{
+        margin: 0 2px;
+    }
+    .add-query-content .query-el .param input , .add-query-content .query-el .param-value input, .add-sort-content .query-el .param input , .add-sort-content .query-el .param-value input{
+        padding: 0 6px;
+        height: 30px;
+    }
+    /* .add-query-content .query-el .comparators{
+        display: flex;
+        justify-content: space-around;
+    } */
+    .add-query-content .query-el .comparators button , .add-sort-content .query-el .comparators button{
+        height: 30px;
+        color: white;
+        transition: background-color 0.3s ease-in;
+        padding:  0 5px;
+    }
+    .add-query-content .query-el .comparators button:hover , .add-sort-content .query-el .comparators button:hover{
+        cursor: pointer;
+        background-color: deepskyblue;
+        transition: background-color 0.3s ease-in;
+    }
+    .query-el .add-query-param:after{
+        font-family: FontAwesome;
+        content: '\f00c';
+        font-size: 22px;
+    }
+    .query-el .remove-query-param:after{
+        font-family: FontAwesome;
+        content: "\f014";
+        font-size: 22px;
+    }
+    .query-el .add-query-param:hover , .query-el .remove-query-param:hover{
+        cursor: pointer;
+        color: silver;
+        transition: color 0.2s ease-in;
+    }
+    .query-el-wrapper{
+        display: none;
+    }
+    .query-el-wrapper.is-visible{
+        display: block;
+    }
+    .query-el-wrapper.is-visible .query-el.is-visible{
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out; 
+    }
+    .result-string {
+        width: fit-content;
+        position: relative;
+        left: 30px;
+        top: 30%;
+    }
+    .result-string p{
+        display: inline-block;
+    }
+    .comparators button.selected{
+        border: 1px solid blue;
+        background-color: darkblue;
+    }
+    .submitBtn{
+        /* background-color: darkblue;
+        color: white; */
+        display: inline-block;
+        position: relative;
+        top: 33%;
+        left: 30px;
+    }
+    .submitBtn button{
+        background-color: darkblue;
+        color: white;
+        padding: 15px;
+    }
+}
