@@ -1,0 +1,14 @@
+db.details.aggregate([
+{$match:{}},
+{
+    $group:{
+    _id:"$product_color",
+total:{
+    $sum:"$product_price"
+},
+average:{
+    $avg:"product_price"
+}
+}
+}
+]);

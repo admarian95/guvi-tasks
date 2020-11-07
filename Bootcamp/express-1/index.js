@@ -24,5 +24,5 @@ app.get('/showLogs',(req,res)=>{
         })
         list += self.item + '</ul>';
         res.send(list);
-    })
+    })  
 });
