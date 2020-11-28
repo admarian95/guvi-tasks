@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>Mentor!</title>
+    <style>
+        li {
+            text-decoration: none;
+            list-style: none;
+        }
+
+        .container {
+            max-height: 450px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <label for="addStudent">Student Name: </label>
+        <input type="text" id="addStudent">
+        <button type="button" class="btn btn-primary " style="margin: 1rem;" onclick="addStudent()">Add
+            addStudent</button>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Mentor</th>
+                </tr>
+            </thead>
+            <tbody id="studentList">
+
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <p> Showing <span id="totalRecords"> 0 </span> records</p>
+    </div>
+</body>
+<script>
+    let baseURL = 'http://localhost:3000';
+    addStudent = () => {
+        if (document.getElementById('addStudent').value.trim() !== '') {
+            fetch(baseURL + '/addStudent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: document.getElementById('addStudent').value, mentor_name: "NA" })
+            }).then(res => res.json()).then(data => {
+                let td1 = document.createElement('td');
+                let td2 = document.createElement('td');
+                let tr = document.createElement('tr');
+                td1.innerText = data.result.ops[0].name;
+                td2.innerText = data.result.ops[0].mentor_name;
+                tr.append(td1, td2);
+                document.getElementById('studentList').append(tr);
+                document.getElementById('addStudent').value = '';
+                document.getElementById('totalRecords').innerText = +(document.getElementById('totalRecords').innerText) + 1;
+            });
+        } else {
+            alert(' name not entered !');
+        }
+    }
+    showAllStudents = () => {
+        fetch(baseURL + '/getAllStudents', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(res => res.json()).then(data => {
+            data.students.forEach(el => {
+                let td1 = document.createElement('td');
+                let td2 = document.createElement('td');
+                let tr = document.createElement('tr');
+                td1.innerText = el.name;
+                td2.innerText = el.mentor_name;
+                tr.append(td1, td2);
+                document.getElementById('studentList').append(tr);
+            });
+            document.getElementById('totalRecords').innerText = data.students.length;
+        })
+        .catch(err=>alert("Can't connect !"))
+    }
+    showAllStudents();
+</script>
+
+</html>

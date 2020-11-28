@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+
+        .container ul {
+            width: 50%;
+            text-align: center;
+            max-height: 450px;
+            overflow: auto;
+        }
+
+        .container ul li {
+            border: 1px solid darkgray;
+            border-bottom: none;
+            border-radius: 2px;
+            background-color: lightgray;
+            padding: 10px;
+        }
+
+        .container ul li:hover {
+            cursor: pointer;
+        }
+
+        .container ul li:last-child {
+            border-bottom: 1px solid darkgray;
+        }
+
+        .container ul li.is-active {
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul id="studentList">
+            <h4>STUDENT LIST : </h4>
+        </ul>
+        <ul id="mentorList">
+            <h4>MENTOR LIST : </h4>
+        </ul>
+    </div>
+    <div class="container">
+        <button type="submit" class="btn btn-primary " id="btnClicked">Add Students</button>
+    </div>
+
+    <script>
+        let baseURL = 'http://localhost:3000';
+        let studentList = document.getElementById('studentList');
+        let mentorList = document.getElementById('mentorList');
+        let btn = document.getElementById('btnClicked');
+        showAllNAStudents = () => {
+            fetch(baseURL + '/getAllNAStudents', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            }).then(res => res.json()).then(data => {
+                data.students.forEach(el => {
+                    let li = document.createElement('li');
+                    li.innerText = el.name;
+                    studentList.append(li);
+                });
+            }).then(() => {
+                let studentListItems = Array.from(document.querySelectorAll('#studentList li'));
+                studentListItems.forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        if(!e.target.classList.contains('is-active')){
+                            e.target.classList.add('is-active')
+                        }else{
+                            e.target.classList.remove('is-active')
+                        }
+                    }
+                )
+            })
+            }).catch(err => alert("Can't connect !"));
+        }
+        showAllMentors = () => {
+            fetch(baseURL + '/showAllMentors', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            }).then(res => res.json()).then(data => {
+                data.students.forEach(el => {
+                    let li = document.createElement('li');
+                    li.innerText = el.mentor_name;
+                    mentorList.append(li);
+                });
+            }).then(()=>{
+                let mentorListItems = Array.from(document.querySelectorAll('#mentorList li'));
+                mentorListItems.forEach(el => {
+                    el.addEventListener('click', (e) => _mentorClicked(e));
+                })
+            }).catch(err => alert(err))
+        }
+        btn.addEventListener('click',()=>{
+            let text=[];
+            let studentListItems = Array.from(document.querySelectorAll('#studentList li'));
+            let mentor = document.querySelector('#mentorList li.is-active');
+            studentListItems.forEach(el=>{
+                if(el.classList.contains('is-active')){
+                    text.push({"name":el.innerText,"mentor_name":mentor.innerText});
+                }
+            });
+            fetch(baseURL + '/addStudentsToMentor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(text)
+            }).then(res => res.json()).then(data=>{
+                alert(data.message);
+                let studentList = document.querySelectorAll('#studentList');
+                console.log(data);
+                while (studentList.firstChild) {
+                    studentList.removeChild(studentList.firstChild);
+            }
+                showAllNAStudents();
+            });
+        });
+        _mentorClicked = (e)=>{
+            let mentorListItems = Array.from(document.querySelectorAll('#mentorList li'));
+            mentorListItems.forEach(el=>{
+                if(el.classList.contains('is-active')){
+                    el.classList.remove('is-active');
+                }
+            });
+           e.target.classList.add('is-active');
+        }
+        showAllNAStudents();
+        showAllMentors();
+    </script>
+</body>
+
+</html>

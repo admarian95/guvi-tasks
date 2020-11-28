@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>Mentor!</title>
+    <style>
+        li {
+            text-decoration: none;
+            list-style: none;
+        }
+
+        .container {
+            max-height: 450px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <label for="addMentor">Mentor Name: </label>
+        <input type="text" id="addMentor">
+        <button type="button" class="btn btn-primary " style="margin: 1rem;" onclick="addMentor()">Add Mentor</button>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody id="mentorList">
+
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <p> Showing <span id="totalRecords"> 0 </span> records</p>
+    </div>
+</body>
+<script>
+    let baseURL = 'http://localhost:3000';
+    addMentor = () => {
+        if (document.getElementById('addMentor').value.trim() !== '') {
+            fetch(baseURL + '/addMentor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mentor_name: document.getElementById('addMentor').value })
+            }).then(res => res.json()).then(data => {
+                let td2 = document.createElement('td');
+                let tr = document.createElement('tr')
+                td2.innerText = data.result.ops[0].mentor_name;
+                tr.append(td2);
+                document.getElementById('mentorList').append(tr);
+                document.getElementById('addMentor').value = '';
+                document.getElementById('totalRecords').innerText = +(document.getElementById('totalRecords').innerText) + 1;
+            });
+        } else {
+            alert(' name not entered !');
+        }
+    }
+    showAllMentors = () => {
+        fetch(baseURL + '/showAllMentors', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(res => res.json()).then(data => {
+            data.students.forEach(el => {
+                let td2 = document.createElement('td');
+                let tr = document.createElement('tr');
+                td2.innerText = el.mentor_name;
+                tr.append(td2);
+                document.getElementById('mentorList').append(tr);
+            });
+            document.getElementById('totalRecords').innerText = data.students.length;
+        })
+        .catch(err=>alert(err))
+    }
+    showAllMentors();
+</script>
+
+</html>

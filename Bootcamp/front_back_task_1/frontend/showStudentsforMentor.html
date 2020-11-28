@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        li {
+            list-style: none;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+
+        .container ul {
+            width: 50%;
+            text-align: center;
+            max-height: 450px;
+            overflow: auto;
+        }
+
+        .container ul li {
+            border: 1px solid darkgray;
+            border-bottom: none;
+            border-radius: 2px;
+            background-color: lightgray;
+            padding: 10px;
+        }
+
+        .container ul li:hover {
+            cursor: pointer;
+        }
+
+        .container ul li:last-child {
+            border-bottom: 1px solid darkgray;
+        }
+
+        .container ul li.is-active {
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul id="mentorList">
+            <h4>MENTOR LIST : </h4>
+        </ul>
+    </div>
+    <div class="container">
+        <!-- <p> <span>0</span> Records fetched</p> -->
+        <button type="submit" class="btn btn-primary" id="btnClicked">Fetch Records!</button>
+    </div>
+    <div class="container">
+        <ul id="studentList">
+            <h4>Students : </h4>
+
+        </ul>
+    </div>
+    <script>
+        let baseURL = 'http://localhost:3000';
+        let mentorList = document.getElementById('mentorList');
+        let btn = document.getElementById('btnClicked');
+        let studentList = document.getElementById('studentList');
+        btn.addEventListener('click', () => {
+            while (studentList.firstChild) {
+                studentList.removeChild(studentList.firstChild);
+            }
+            let mentor = document.querySelector('#mentorList li.is-active');
+            showAllStudents(mentor.innerText);
+        })
+        showAllMentors = () => {
+            fetch(baseURL + '/showAllMentors', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            }).then(res => res.json()).then(data => {
+                data.students.forEach(el => {
+                    let li = document.createElement('li');
+                    li.innerText = el.mentor_name;
+                    mentorList.append(li);
+                });
+            }).then(() => {
+                let mentorListItems = Array.from(document.querySelectorAll('#mentorList li'));
+                mentorListItems.forEach(el => {
+                    el.addEventListener('click', (e) => _mentorClicked(e));
+                })
+            }).catch(err => alert(err))
+        }
+        showAllStudents = (data) => {
+            fetch(baseURL + '/getStudents', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data })
+            }).then(res => res.json()).then(data => {
+                if (data.message) {
+                    alert(data.message);
+                }
+                data.students.forEach(el => {
+                    let li = document.createElement('li');
+                    li.innerText = el.name;
+                    studentList.append(li);
+                });
+
+            }).catch(err => alert(err));
+        }
+        _mentorClicked = (e) => {
+            let mentorListItems = Array.from(document.querySelectorAll('#mentorList li'));
+            mentorListItems.forEach(el => {
+                if (el.classList.contains('is-active')) {
+                    el.classList.remove('is-active');
+                }
+            });
+            e.target.classList.add('is-active');
+        }
+        showAllMentors();
+    </script>
+</body>
+
+</html>
