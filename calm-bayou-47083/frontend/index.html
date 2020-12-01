@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>Document</title>
+<style>
+    .container{
+        margin-top: 5rem;
+        width: 40%;
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+            <div class="form-group">
+                <label for="mail">Email address</label>
+                <input type="email" class="form-control" id="mail" placeholder="Enter email">
+            </div>
+            <button type="submit" id="forgotPassword" class="btn btn-primary">Forgot Password</button>
+    </div>
+    <script>
+        let ip = document.getElementById('mail');
+        let btn = document.getElementById('forgotPassword');
+        console.log(mail);
+        let baseUrl = 'https://calm-bayou-47083.herokuapp.com';
+        btn.addEventListener('click',()=>sendMail());
+        sendMail = () => {
+            let mail = ip.value;
+            fetch(baseUrl + '/sendchangePasswordMail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body : JSON.stringify({"email":mail})
+            }).then(res => res.json()).then(data => {
+                    alert(data.message);
+                    ip.value = '';
+            }).catch(err => alert(err));
+        }
+    </script>
+</body>
+
+</html>

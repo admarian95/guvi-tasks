@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHECK STRING PAGE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <form action='/checkLocalString' method="POST">
+        <div class="container">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="text" class="form-control" id="email" name="email" value= '<%= email %>' readonly='true' />
+            </div>
+            <div class="form-group">
+                <label for="password">Temp String</label>
+                <input type="text" class="form-control" id="password" name="password" placeholder="Enter String">
+            </div>
+            <button type="submit" id="forgotPassword" class="btn btn-primary">Check Temp String</button>
+        </div>
+    </form>
+</body>
+
+</html>
