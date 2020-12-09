@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>Forgot Password Page </title>
+</head>
+
+<style>
+    .container {
+        margin-top: 5rem;
+        width: 40%;
+    }
+
+    .is-inactive {
+        display: none;
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="tempString">Enter tempString</label>
+            <input type="text" class="form-control" id="tempString" placeholder="Enter temp string">
+        </div>
+        <div class="form-group is-inactive">
+            <label for="email">New Password</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter new Password">
+        </div>
+        <button type="submit" id="verify" class="btn btn-primary">Verify Temp String </button>
+        <button type="submit" id="setNewPassword" class="btn btn-primary" disabled>Set new Password </button>
+    </div>
+    <script>
+        let str = document.getElementById('tempString');
+        let verify = document.getElementById('verify');
+        let setNewPassword = document.getElementById('setNewPassword');
+        let user = window.location.pathname.split('/')[1];
+        verify.addEventListener('click', () => verifyTempString());
+        setNewPassword.addEventListener('click', () => createNewPassword());
+        verifyTempString = () => {
+            let tempString = document.getElementById('tempString').value;
+            fetch('/' + user + '/tempStringVerify', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ tempString })
+            }).then(res => res.json()).then(data => {
+                alert(data.message);
+                if (data.message === 'verified') {
+                    let div = document.querySelector('.is-inactive');
+                    div.classList.remove('is-inactive');
+                    setNewPassword.removeAttribute('disabled');
+                    verify.setAttribute('disabled', true);
+                    str.setAttribute('readOnly', true);
+                }
+            });
+        }
+
+        createNewPassword = () => {
+            let password = document.getElementById('email').value;
+            fetch('/createNewPassword', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ password , user })
+            }).then(res => res.json()).then(data => {
+                alert(data.message);
+                if (data.message === 'password updated') {
+                    window.location.href = 'https://vigilant-goodall-75c5c9.netlify.app';  // netlify url of login page
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

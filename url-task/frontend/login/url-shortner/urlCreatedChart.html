@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>Chart</title>
+    <style>
+        .container {
+            margin-top: 5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <canvas id="myChart"> </canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script defer>
+        let baseUrl = 'https://arcane-oasis-81949.herokuapp.com/';
+        let labels = [];
+        let Data = [];
+        let ctx = document.getElementById('myChart').getContext('2d');
+        for (let i = 1; i < 32; i++) {
+            let label = i.toString()
+            labels.push(label)
+            Data.push(0);
+        }
+        fetch(baseUrl + 'urlsDashboard', {
+            method: 'GET',
+            headers: {
+                'Authorization' : sessionStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json()).then(data => {
+            let payload = data.payload;
+            console.log('payload :: ', payload);
+            payload.forEach(el => {
+
+                let count = el.count;
+                let day = el._id.date;
+                Data[day] = count;
+            })
+            createChart(labels,Data);
+        }).catch(err=>{
+            alert('token expired probably !');
+            window.location.href = '../login.html';
+        })
+
+        createChart=(labels,data)=>{
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'URLs Created ',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: data
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+    }
+    </script>
+</body>
+
+</html>

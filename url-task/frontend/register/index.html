@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>Register Page </title>
+</head>
+
+<style>
+    .container {
+        margin-top: 5rem;
+        width: 40%;
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="First Name">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter Password">
+        </div>
+        <button type="submit" id="register" class="btn btn-primary">Register</button>
+    </div>
+    <script>
+        let email = document.getElementById('email');
+        let firstName = document.getElementById('firstName');
+        let lastName = document.getElementById('lastName');
+        let password = document.getElementById('password');
+        let btn = document.getElementById('register');
+        let ip = document.querySelectorAll('input');
+        console.log(Array.from(ip))
+        let baseUrl = 'https://arcane-oasis-81949.herokuapp.com';
+        btn.addEventListener('click', () => sendMail());
+        sendMail = () => {
+            email = email.value;
+            firstName = firstName.value;
+            lastName = lastName.value;
+            password = password.value;
+            fetch(baseUrl + '/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email,firstName,lastName,password})
+            }).then(res => res.json()).then(data => {
+                alert(data.message);
+                Array.from(ip).forEach(el=>{
+                el.value ='';
+                })
+            }).catch(err => alert(err));
+        }
+    </script>
+</body>
+
+</html>

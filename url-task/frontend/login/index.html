@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>Register Page </title>
+</head>
+
+<style>
+    .container {
+        margin-top: 5rem;
+        width: 40%;
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter Password">
+        </div>
+        <button type="submit" id="login" class="btn btn-primary">Login</button>
+        <button type="submit" id="forgotPassword" class="btn btn-danger">Forgot Password</button>
+    </div>
+    <script>
+        let btn = document.getElementById('login');
+        let forgotPassword = document.getElementById('forgotPassword');
+        forgotPassword.addEventListener('click', () => window.location.href = 'https://peaceful-austin-ecaea1.netlify.app');
+        btn.addEventListener('click', () => checkCred());
+        checkCred = () => {
+            let email = document.getElementById('email');
+            let password = document.getElementById('password');
+            let ip = document.querySelectorAll('input');
+            let baseUrl = 'https://arcane-oasis-81949.herokuapp.com';
+            email = email.value;
+            password = password.value;
+            console.log(password)
+            fetch(baseUrl + '/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            }).then(res => res.json()).then(data => {
+                console.log(data);
+                if (data.message){
+                    alert(data.message)
+                }
+                else if (data.message === undefined){
+                    sessionStorage.setItem('token', data.token);
+                    window.location.href = './url-shortner/urlcreate.html'
+                }
+                Array.from(ip).forEach(el => {
+                    el.value = '';
+                });
+            }).catch(err => alert(err));
+        }
+    </script>
+</body>
+
+</html>

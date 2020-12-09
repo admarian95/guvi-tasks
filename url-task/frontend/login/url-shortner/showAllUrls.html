@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>Show All URLs</title>
+    <style>
+        .container {
+            margin-top: 5rem;
+            max-height: 450px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"> Short URLs</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+        let tbody = document.getElementById('data');
+        let baseUrl = 'https://arcane-oasis-81949.herokuapp.com/';
+        fetch(baseUrl + 'urls', {
+            method: 'GET',
+            headers: {
+                'Authorization' : sessionStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json()).then(data => {
+            // console.log(data)
+            if(data.message){
+                alert(data.message);
+                window.location.href = '/';
+                sessionStorage.removeItem('token');
+            }else{
+            data.payload.forEach(el => {
+                let tr = document.createElement('tr');
+                let td = document.createElement('td');
+                let a = document.createElement('a');
+                a.setAttribute('href', el.shortUrl);
+                a.innerHTML = el.shortUrl;
+                td.appendChild(a);
+                tr.appendChild(td);
+                tbody.append(tr);
+            })
+        }
+        }).catch(err => alert(err));
+    </script>
+</body>
+
+</html>
