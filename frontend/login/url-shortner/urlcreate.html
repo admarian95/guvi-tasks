@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>URL Create</title>
+</head>
+
+<body>
+    <style>
+        .container {
+            margin-top: 5rem;
+            width: 40%;
+        }
+    </style>
+    </head>
+
+    <div class="container">
+        <div class="form-group">
+            <label for="url"> URL</label>
+            <input type="email" class="form-control" id="url" placeholder="Enter  Long URL">
+        </div>
+        <p>The shortened URL is : <b><span id="shortURL"></span></b></p>
+        <button type="submit" id="generateURL" class="btn btn-primary">Generate URL</button>
+        <div class="container">
+        <p><a href = '../url-shortner/showAllUrls.html'> Goto showAllUrls</a></p>
+        <p><a href = '../url-shortner/urlCreatedChart.html'> Goto dashboard</a></p>
+    </div>
+    </div>
+    <script>
+        let btn = document.getElementById('generateURL');
+        let ip = document.querySelectorAll('input');
+        btn.addEventListener('click', () => generateURL());
+        generateURL = () => {
+            let url = document.getElementById('url').value;
+            let baseUrl = 'https://arcane-oasis-81949.herokuapp.com';
+            fetch(baseUrl + '/shortenURL', {
+                method: 'POST',
+                headers: {
+                    'Authorization':sessionStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url})
+            }).then(res => res.json()).then(data => {
+                   let short = document.getElementById('shortURL');
+                   short.innerHTML = data.message;
+            }).catch(err => alert(err));
+        }
+    </script>
+</body>
+
+</html>
